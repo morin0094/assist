@@ -1,0 +1,72 @@
+﻿@function em($target, $context: 16) {
+  @return ($target / $context) * 1em;
+}
+
+@function rem($target, $context: 16) {
+  @return ($target / $context) * 1rem;
+}
+
+@function percent($elem, $container: 950) {
+  @return #{(($elem * 100) / $container) + '%'};
+}
+
+$t1: 0.25s;
+$t2: 0.5s;
+
+// ================================================================================================================
+// COULEURS
+// ================================================================================================================
+
+//Texte courant
+$text: #231F20;
+//Texte (variante)
+$label: #757678;
+
+$c1: #000;
+$c1h: #000;
+$c2: #000;
+$c2h: #000;
+
+//Principale
+$blue1: #00224B;
+$blue1h: #0058c4;
+//Secondaire
+$blue2: #003D85;
+$blue2h: #011429;
+//Secondaire
+$blue3: #00ADC4;
+$blue3h: #00869E;
+
+
+//Filigrane
+$filigrane: #999;
+
+//Bordures
+$border: #cfcfd3;
+//Validation
+$valid: #00c609;
+//Avertissement
+$warning: #f98900;
+//Erreur
+$error: #e10a00;
+
+// ================================================================================================================
+// POLICES DE CARACTÈRE
+// ================================================================================================================
+
+@font-face {
+  font-family: 'corisandebold';
+  src: url('../fonts/corisande-bold-webfont.woff2') format('woff2'), url('../fonts/corisande-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+//Texte courant
+$font: 'Open Sans', sans-serif;
+//Autres
+$roboto: 'Roboto', sans-serif;
+$cori: 'corisandebold', sans-serif;
+//FontAwesome
+$fa: "Font Awesome 5 Pro";
+$fab: "Font Awesome 5 Brands";
+$fad: "Font Awesome 5 Duotone";

@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Index</title>
+  <meta name="description" content="" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="HandheldFriendly" content="True" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-9ZfPnbegQSumzaE7mks2IYgHoayLtuto3AS6ieArECeaR8nCfliJVuLh/GaQ1gyM" crossorigin="anonymous" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="shortcut icon" href="images/favicon.ico" />
+  <script type="text/javascript" src="js/functions.js"></script>
+
+</head>
+<body>
+  <div id="app">
+    <header>
+      <div class="left">
+        <div class="logo">
+          <img src="images/uni-assist.png" alt="Uni AssisT" />
+        </div>
+        <div class="infos">
+          <div class="label">Appelez-nous</div>
+          <div class="value">1 888 359-1357&nbsp;&nbsp;&nbsp;Lundi au vendredi | 9 h à 17 h</div>
+        </div>
+        <div class="infos">
+          <div class="label">Écrivez-nous</div>
+          <div class="value">Remplir le formulaire</div>
+        </div>
+        <button class="btn">Bulletin AssisT</button>
+      </div>
+      <div class="right">
+        <div class="sectionLinks">
+          <a href="#" class="selected">Particuliers</a>
+          <a href="#">Entreprises</a>
+        </div>
+        <div class="btnMenu">
+          <i class="far fa-bars"></i>
+        </div>
+      </div>
+    </header>
+    <div class="main">
+      <div class="leftMenu">
+        <ul>
+          <li>
+            <a href="#">Transactions et <br />services en ligne</a>
+          </li>
+          <li class="selected">
+            <a href="#">Épargne et <br />investissement</a>
+          </li>
+          <li>
+            <a href="#">Achat <br />de maison</a>
+          </li>
+          <li>
+            <a href="#">Cartes, marges <br />et prêts</a>
+          </li>
+          <li></li>
+        </ul>
+      </div>
+      <div class="wrapContent">
+        <div class="mainSection">
+          Transactions et services en ligne
+        </div>
+        <div class="mainTitle">
+          <h1>Un soutien pour devenir autonome</h1>
+        </div>
+        <div class="content">
+          <div class="left">
+            <div include="includes/outil.html"></div>
+            <div include="includes/content.html"></div>
+            <div include="includes/nouveau.html"></div>
+            <div include="includes/sections.html"></div>
+            <div include="includes/tutorials.html"></div>
+          </div>
+          <div class="right">
+            <div include="includes/contact.html"></div>
+            <div include="includes/financement.html"></div>
+            <div include="includes/guide.html"></div>
+            <div include="includes/links.html"></div>
+            <div include="includes/quote.html"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="js/include.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+  <script>
+    (function () {
+      var metaViewport = document.createElement("meta");
+      metaViewport.setAttribute("name", "viewport");
+      if (document.body.offsetWidth > 767) {
+        metaViewport.setAttribute("content", "width=1270, initial-scale=1.0");
+      } else {
+        metaViewport.setAttribute("content", "width=device-width, initial-scale=1.0");
+      }
+      document.head.append(metaViewport);
+    })();
+  </script>
+</body>
+</html>
