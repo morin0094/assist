@@ -6,34 +6,825 @@
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="HandheldFriendly" content="True" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    .loading {
+      height: 100%;
+      width: 100%;
+      background: #FFF;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      z-index: 100;
+      top: 0;
+      left: 0;
+    }
+
+      .loading.img {
+        width: 128px;
+      }
+
+    #app {
+      display: none;
+    }
+  </style>
   <link rel="preconnect" href="https://fonts.gstatic.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-9ZfPnbegQSumzaE7mks2IYgHoayLtuto3AS6ieArECeaR8nCfliJVuLh/GaQ1gyM" crossorigin="anonymous" />
-  <link rel="stylesheet" href="css/main.css" />
+  <link rel="preload" href="css/normalize.css" as="style" />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;700&display=swap" /></noscript>
+  <link rel="preload" href="https://pro.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-9ZfPnbegQSumzaE7mks2IYgHoayLtuto3AS6ieArECeaR8nCfliJVuLh/GaQ1gyM" crossorigin="anonymous" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.1/css/all.css" /></noscript>
+  <link rel="preload" href="css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="css/main.css" /></noscript>
   <link rel="shortcut icon" href="images/favicon.ico" />
-  <script type="text/javascript" src="js/functions.js"></script>
-  
+  <link rel="preload" href="css/tiny-slider.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="css/tiny-slider.css" /></noscript>
+  <script type="text/javascript" src="js/tiny-slider.js" defer></script>
 </head>
 <body>
-  <div id="app">
-    <div include="includes/menu.html"></div>
-    <div include="includes/bulletinPanel.html"></div>
+  <div id="loading" class="loading">
+    <img src="images/loading.gif" />
   </div>
-  <script type="text/javascript" src="js/include.js"></script>
-  <script type="text/javascript" src="js/main.js"></script>
-  <script>
-    (function () {
-      var metaViewport = document.createElement("meta");
-      metaViewport.setAttribute("name", "viewport");
-      if (document.body.offsetWidth > 767) {
-        metaViewport.setAttribute("content", "width=1270, initial-scale=1.0");
-      } else {
-        metaViewport.setAttribute("content", "width=device-width, initial-scale=1.0");
-      }
-      document.head.append(metaViewport);
-    })();
-  </script>
+  <div id="app">
+    <div id="home" class="home">
+      <header class="m">
+        <div class="left">
+          <div class="logo">
+            <img src="images/uni-assist.png" alt="Uni AssisT" />
+          </div>
+        </div>
+        <div class="right">
+          <div class="btnMenu" onclick="openBigMenu()">
+            <i class="far fa-bars"></i>
+          </div>
+        </div>
+      </header>
+      <div class="homeMenu">
+        <div class="sections">
+          <a href="#" class="selected">Particuliers</a>
+          <a href="#">Entreprises</a>
+        </div>
+        <button class="btnMenu" onclick="openBigMenu()"><i class="far fa-bars"></i></button>
+      </div>
+      <div class="homeContent">
+        <div class="logo">
+          <img src="images/uni-assist.png" alt="UNI AssisT" loading="lazy" />
+        </div>
+        <h1>Votre point de services virtuel</h1>
+        <p>En personne <br class="m" />comme à distance <br />Bien vous accompagner <br class="m" />est notre priorité</p>
+      </div>
+      <div class="wrapSlider">
+        <div class="homeSlider">
+          <div>
+            <a href="#" class="light">
+              <div>
+                <div class="subtitle">Outil d'accompagnement</div>
+                <h2>Vous cherchez une info précise?</h2>
+              </div>
+              <div class="viewMore"><span class="btn white width100 angle">Essayer l'outil</span></div>
+            </a>
+          </div>
+          <div>
+            <a onclick="showDetails('onlineServices')">
+              <div>
+                <h2>Transactions et services en ligne</h2>
+                <div class="subtitle">Un soutien pour devenir autonome</div>
+              </div>
+              <div class="viewMore"><span class="angleDown">Consulter la section</span></div>
+              <div class="icon"><img src="images/home-icon-2.png" alt="" /></div>
+            </a>
+          </div>
+          <div>
+            <a onclick="showDetails('savings')">
+              <div>
+                <h2>Épargne et investissement</h2>
+                <div class="subtitle">Une stratégie pour m'épanouir</div>
+              </div>
+              <div class="viewMore"><span class="angleDown">Consulter la section</span></div>
+              <div class="icon"><img src="images/home-icon-3.png" alt="" /></div>
+            </a>
+          </div>
+          <div>
+            <a onclick="showDetails('loans')">
+              <div>
+                <h2>Prêts, marges et cartes de crédit</h2>
+                <div class="subtitle">Des ressources pour mieux grandir</div>
+              </div>
+              <div class="viewMore"><span class="angleDown">Consulter la section</span></div>
+              <div class="icon"><img src="images/home-icon-4.png" alt="" /></div>
+            </a>
+          </div>
+          <div>
+            <a onclick="showDetails('house')">
+              <div>
+                <h2>Ma maison</h2>
+                <div class="subtitle">Un plan à ma façon</div>
+              </div>
+              <div class="viewMore"><span class="angleDown">Consulter la section</span></div>
+              <div class="icon"><img src="images/home-icon-5.png" alt="" /></div>
+            </a>
+          </div>
+        </div>
+        <div class="progress">
+          <div class="bar"></div>
+        </div>
+      </div>
+      <div class="homeImages">
+        <div>
+          <img src="images/home-image-1.png" loading="lazy" />
+        </div>
+        <div>
+          <img src="images/home-image-2.png" loading="lazy" />
+        </div>
+        <div>
+          <img src="images/home-image-3.png" loading="lazy" />
+        </div>
+        <div>
+          <img src="images/home-image-4.png" loading="lazy" />
+        </div>
+        <div>
+          <img src="images/home-image-5.png" loading="lazy" />
+        </div>
+      </div>
+      <div class="m sections">
+        <a href="#" class="selected">Particuliers</a>
+        <a href="#">Entreprises</a>
+      </div>
+      <div class="visual visual-pea"><img src="images/shapes/pea-stroke-thick.png" alt="" /></div>
+      <div class="visual visual-tooth"><img src="images/shapes/tooth-skin.png" alt="" /></div>
+      <div class="visual visual-peanut"><img src="images/shapes/peanut-gradient.png" alt="" /></div>
+    </div>
+    <div id="details" class="details">
+      <header>
+        <div class="left">
+          <div class="logo">
+            <a onclick="mainScreen()"><img src="images/uni-assist.png" alt="Uni AssisT" loading="lazy" /></a>
+          </div>
+          <div class="infos">
+            <div class="label">Appelez-nous</div>
+            <div class="value">1 888 359-1357&nbsp;&nbsp;&nbsp;Lundi au vendredi | 9 h à 17 h</div>
+          </div>
+          <div class="infos">
+            <div class="label">Écrivez-nous</div>
+            <div class="value"><a onclick="openContactPanel()">Remplir le formulaire</a></div>
+          </div>
+          <button class="btn" onclick="openBulletinPanel()">Bulletin AssisT</button>
+        </div>
+        <div class="right">
+          <div class="sectionLinks">
+            <a href="#" class="selected">Particuliers</a>
+            <a href="#">Entreprises</a>
+          </div>
+          <div class="btnMenu" onclick="openBigMenu()">
+            <i class="far fa-bars"></i>
+          </div>
+        </div>
+      </header>
+      <div class="main">
+        <div class="leftMenu">
+          <ul>
+            <li id="menu_onlineServices">
+              <a onclick="switchDetails('onlineServices')">Transactions et <br />services en ligne</a>
+            </li>
+            <li id="menu_savings">
+              <a onclick="switchDetails('savings')">Épargne et <br />investissement</a>
+            </li>
+            <li id="menu_house">
+              <a onclick="switchDetails('house')">Ma maison</a>
+            </li>
+            <li id="menu_loans">
+              <a onclick="switchDetails('loans')">Prêts, marges et <br />cartes de crédit</a>
+            </li>
+            <li></li>
+          </ul>
+        </div>
+        <div class="wrapContent">
+          <div>
+            <div id="onlineServices" class="wrapSection">
+              <div class="mainSection">
+                Transactions et services en ligne
+              </div>
+              <div class="mainTitle">
+                <h1>Un soutien pour devenir autonome</h1>
+              </div>
+              <div class="content">
+                <div class="left">
+                  <div class="block outil">
+                    <div class="blockHeader">
+                      <h3>Outil d'accompagnement</h3>
+                    </div>
+                    <div class="blockContent">
+                      <h4>Nous vous mènerons vers l'opération financière recherchée.</h4>
+                      <!--
+              Mettre les urls de redirection dans les attributs "value".
+              À noter que la liste de bouton radio c'est en desktop et en dessous il y a une liste déroulante pour mobile
+            -->
+                      <div class="radioList d">
+                        <label class="fakeRadio">
+                          <input type="radio" name="servicesRadio" value="" /><span class="icon"></span>M'inscrire aux services en ligne
+                        </label>
+                        <label class="fakeRadio">
+                          <input type="radio" name="servicesRadio" value="" /><span class="icon"></span>Me connecter aux services en ligne
+                        </label>
+                        <label class="fakeRadio">
+                          <input type="radio" name="servicesRadio" value="" /><span class="icon"></span>Télécharger l'application
+                        </label>
+                        <label class="fakeRadio">
+                          <input type="radio" name="servicesRadio" value="" /><span class="icon"></span>Récupérer mon mot de passe
+                        </label>
+                        <label class="fakeRadio">
+                          <input type="radio" name="servicesRadio" value="" /><span class="icon"></span>Activer la connexion à double authentification
+                        </label>
+                        <label class="fakeRadio">
+                          <input type="radio" name="servicesRadio" value="" /><span class="icon"></span>Consulter mon solde
+                        </label>
+                        <label class="fakeRadio">
+                          <input type="radio" name="servicesRadio" value="" /><span class="icon"></span>Payer une facture
+                        </label>
+                        <label class="fakeRadio">
+                          <input type="radio" name="servicesRadio" value="" /><span class="icon"></span>Retirer de l'argent
+                        </label>
+                        <label class="fakeRadio">
+                          <input type="radio" name="servicesRadio" value="" /><span class="icon"></span>Faire un dépôt
+                        </label>
+                        <label class="fakeRadio">
+                          <input type="radio" name="servicesRadio" value="" /><span class="icon"></span>Faire un virement
+                        </label>
+                      </div>
+                      <div class="fakeSelect m">
+                        <select>
+                          <option value="">M'inscrire aux services en ligne</option>
+                          <option value="">Me connecter aux services en ligne</option>
+                          <option value="">Télécharger l'application</option>
+                          <option value="">Récupérer mon mot de passe</option>
+                          <option value="">Activer la connexion à double authentification</option>
+                          <option value="">Consulter mon solde</option>
+                          <option value="">Payer une facture</option>
+                          <option value="">Retirer de l'argent</option>
+                          <option value="">Faire un dépôt</option>
+                          <option value="">Faire un virement</option>
+                        </select>
+                      </div>
+                      <button class="btn angle">Continuer</button>
+                    </div>
+                  </div>
+                  <div class="block guide">
+                    <div class="title">Guide des services en ligne AssisT</div>
+                    <div class="link"><a href="#" class="angle">Consulter</a></div>
+                    <div class="img"><img src="images/guide-service.png" /></div>
+                  </div>
+                </div>
+                <div class="right">
+                  <div class="block links">
+                    <div class="blockHeader">
+                      <h3>Connexions</h3>
+                    </div>
+                    <div class="blockContent">
+                      <div class="text">
+                        <ul>
+                          <li>
+                            <a class="angle" target="_blank" href="https://accweb.mouv.acadie.com/identifiantunique/identification?langueCible=fr&domaineVirtuel=acadie">AccèsD pour particuliers</a>
+                          </li>
+                          <li>
+                            <a class="angle" target="_blank" href="https://app.nesto.ca/login">Nesto agence hypothécaire</a>
+                          </li>
+                          <li>
+                            <a class="angle" target="_blank" href="https://www.qtrade.ca/fr/investor.html">Investisseur Qtrade</a>
+                          </li>
+                          <li>
+                            <a class="angle" target="_blank" href="https://accweb.mouv.acadie.com/identifiantunique/identification?domaineVirtuel=acadiecaissescolaire">La Caisse scolaire</a>
+                          </li>
+                          <li>
+                            <a class="angle" target="_blank" href="https://www.uni.ca/fr/credential/">Credential</a>
+                          </li>
+                          <li>
+                            <a class="angle" target="_blank" href="https://servicepostal.acadie.com/">Service postal Acadie</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="block news">
+                    <div class="bar">Nouveau</div>
+                    <div class="blockContent">
+                      <div class="text">
+                        <h4>Suspendre temporairement une carte de crédit</h4>
+                        <p><a class="angle" target="_blank" href="https://www.uni.ca/fr/uniassist/suspendre-carte-perdue-ou-volee">Voir le processus</a></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="block tutorials">
+                    <div class="blockHeader">
+                      <h3>Tutoriels vidéo</h3>
+                    </div>
+                    <div class="blockContent">
+                      <a href="#" class="video">Ma première connexion</a>
+                      <a href="#" class="video">Me connecter à mon compte</a>
+                      <a href="#" class="video">Virements entre comptes</a>
+                      <a href="#" class="video">Virements Interac<sup>MD</sup></a>
+                      <a href="#" class="video">Payer mes factures</a>
+                      <div class="link">
+                        <a href="#" class="angle">Voir tous les tutoriels</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="savings" class="wrapSection">
+              <div class="mainSection">
+                Épargne et investissement
+              </div>
+              <div class="mainTitle">
+                <h1>Une stratégie pour m'épanouir</h1>
+              </div>
+              <div class="content">
+                <div class="left">
+                  <div class="block links">
+                    <div class="blockHeader">
+                      <h3>Investir avec un expert</h3>
+                    </div>
+                    <div class="blockContent">
+                      <div class="text">
+                        <ul>
+                          <li>
+                            <a target="_blank" class="angle" href="https://www.uni.ca/fr/patrimoine/trouvez-un-conseiller?locale=fr&lat=46.090794&lng=-64.786163&limit=0&prox=0&guichet=1&entreprise=1&service=1">Trouver un conseiller</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="block links">
+                    <div class="blockHeader">
+                      <h3>Êtes-vous près de votre objectif?</h3>
+                    </div>
+                    <div class="blockContent">
+                      <div class="text">
+                        <ul>
+                          <li>
+                            <a target="_blank" class="angle" href="https://www.uni.ca/fr/patrimoine/trouvez-un-conseiller?locale=fr&lat=46.090794&lng=-64.786163&limit=0&prox=0&guichet=1&entreprise=1&service=1">Faire le test</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="right">
+                  <div class="block links">
+                    <div class="blockHeader">
+                      <h3>Investir par moi-même</h3>
+                    </div>
+                    <div class="blockContent">
+                      <div class="text">
+                        <ul>
+                          <li>
+                            <a class="angle" target="_blank" href="https://www.uni.ca/fr/particuliers/produit/investisseur-qtrade">Effectuer un investissement avec le courtier en ligne Qtrade</a>
+                          </li>
+                          <li>
+                            <a class="angle" target="_blank" href="https://www.uni.ca/fr/uniassist/effectuer-un-placement">Effectuer un placement en ligne avec AccèsD</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="block quote">
+                    <div class="text">Les ménages qui ont choisi et retenu les services d'un conseiller financier ont accumulé <b>entre 69 et 290&nbsp;% plus d'actifs</b> en moyenne sur 15&nbsp;ans que ceux n'ayant pas fait appel à un conseiller.</div>
+                    <div class="source"><a target="_blank" href="https://www.finance-investissement.com/nouvelles/actualites/les-conseils-ont-un-prix-mais-quelle-en-est-la-valeur/">FI Finance et Investissement, 2016</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="loans" class="wrapSection">
+              <div class="mainSection">
+                Prêts, marges et cartes de crédit
+              </div>
+              <div class="mainTitle">
+                <h1>Des ressources pour mieux grandir</h1>
+              </div>
+              <div class="content">
+                <div class="left">
+                  <div class="block outil">
+                    <div class="blockHeader">
+                      <h3>Quel est votre besoin de financement?</h3>
+                    </div>
+                    <div class="blockContent">
+                      <h4>Sélectionnez une catégorie</h4>
+                      <div class="radioList d">
+                        <label class="fakeRadio">
+                          <input type="radio" name="test" /><span class="icon"></span>Marge de crédit personnelle
+                        </label>
+                        <label class="fakeRadio">
+                          <input type="radio" name="test" /><span class="icon"></span>Prêt personnel
+                        </label>
+                        <label class="fakeRadio">
+                          <input type="radio" name="test" /><span class="icon"></span>Carte de crédit
+                        </label>
+                      </div>
+                      <div class="fakeSelect m">
+                        <select>
+                          <option>Marge de crédit personnelle</option>
+                          <option>Prêt personnel</option>
+                          <option>Carte de crédit</option>
+                        </select>
+                      </div>
+                      <button class="btn angle">Continuer</button>
+                    </div>
+                  </div>
+                  <div class="block news">
+                    <div class="bar">Nouveau</div>
+                    <div class="blockContent">
+                      <div class="text">
+                        <h4>Suspendre temporairement une carte de crédit</h4>
+                        <p><a href="#" class="angle">Voir le processus</a></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="right">
+                  <div class="block links">
+                    <div class="blockHeader">
+                      <h3>Carte perdue ou volée</h3>
+                    </div>
+                    <div class="blockContent">
+                      <div class="text">
+                        <ul>
+                          <li>
+                            <a href="#" class="angle">Signaler une carte perdue ou volée</a>
+                          </li>
+                          <li>
+                            <a href="#" class="angle">Suspendre une carte perdue ou volée</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="house" class="wrapSection">
+              <div class="mainSection">
+                Ma maison
+              </div>
+              <div class="mainTitle">
+                <h1>Un plan à ma façon</h1>
+              </div>
+              <div class="content">
+                <div class="left">
+                  <div class="block outil">
+                    <div class="blockHeader">
+                      <h3>Quel est votre projet?</h3>
+                    </div>
+                    <div class="blockContent">
+                      <h4>Sélectionnez un sujet</h4>
+                      <div class="radioList d">
+                        <label class="fakeRadio">
+                          <input type="radio" name="test" /><span class="icon"></span>Acheter ou construire une maison
+                        </label>
+                        <label class="fakeRadio">
+                          <input type="radio" name="test" /><span class="icon"></span>Rénover sa maison
+                        </label>
+                        <label class="fakeRadio">
+                          <input type="radio" name="test" /><span class="icon"></span>Renouveler son hypothèque
+                        </label>
+                        <label class="fakeRadio">
+                          <input type="radio" name="test" /><span class="icon"></span>Transférer son hypothèque chez UNI
+                        </label>
+                      </div>
+                      <div class="fakeSelect m">
+                        <select>
+                          <option>Acheter ou construire une maison</option>
+                          <option>Rénover sa maison</option>
+                          <option>Renouveler son hypothèque</option>
+                          <option>Transférer son hypothèque chez UNI</option>
+                        </select>
+                      </div>
+                      <button class="btn angle">Continuer</button>
+                    </div>
+                  </div>
+                  <div class="block quote">
+                    <div class="text">Statistique intéressante</div>
+                    <div class="source"><a href="#">Lorem ipsum</a></div>
+                  </div>
+                </div>
+                <div class="right">
+                  <div class="block contact">
+                    <div class="blockHeader">
+                      <h3>Préparer votre projet</h3>
+                    </div>
+                    <div class="blockContent">
+                      <div class="text">
+                        <ul>
+                          <li>Question 1</li>
+                          <li>Question 2</li>
+                          <li>Question 3</li>
+                        </ul>
+                        <a class="btn angle" href="#">Calculateur hypothécaire</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="detailsImgs">
+          <img id="img_onlineServices" src="images/image-2.png" />
+          <img id="img_savings" src="images/image-3.png" />
+          <img id="img_house" src="images/image-4.png" />
+          <img id="img_loans" src="images/image-5.png" />
+        </div>
+      </div>
+    </div>
+    <div id="bigMenu">
+      <button class="close" onclick="closeBigMenu()">
+        <i class="far fa-times"></i>
+      </button>
+      <div class="left">
+        <div class="top">
+          <div class="sectionTitle">
+            Vous êtes dans la section <span>Particuliers</span>
+          </div>
+          <div class="otherSection">
+            Vous êtes entrepreneur?&nbsp;&nbsp;<a class="angle" href="#">Visitez la section Entreprises</a>
+          </div>
+        </div>
+        <div class="bottom">
+          <div class="left">
+            <div>
+              <div class="category">
+                <div>
+                  <div class="title">Épargne et investissement</div>
+                  <ul>
+                    <li>
+                      Investir avec un expert
+                      <ul>
+                        <li><a target="_blank" href="#">Trouver un conseiller financier</a></li>
+                      </ul>
+                    </li>
+                    <li>
+                      Investir par vous même
+                      <ul>
+                        <li><a target="_blank" href="#">Faire un investissement avec le courtier en ligne Qtrade</a></li>
+                        <li><a target="_blank" href="#">Effectuer un placement en ligne avec AccèsD</a></li>
+                      </ul>
+                    </li>
+                    <li>
+                      Êtes-vous près de votre objectif?
+                      <ul>
+                        <li><a target="_blank" href="#">Faire le test</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+                <div class="viewAll">
+                  <a onclick="menuNavigation('savings')" class="angleDown">Consulter la section complète</a>
+                </div>
+              </div>
+              <div class="category">
+                <div>
+                  <div class="title">Prêts, marges et cartes de crédit</div>
+                  <ul>
+                    <li>
+                      Produits
+                      <ul>
+                        <li><a target="_blank" href="#">Obtenir un prêt personnel</a></li>
+                        <li><a target="_blank" href="#">Obtenir une marge de crédit</a></li>
+                        <li><a target="_blank" href="#">Obtenir une carte de crédit</a></li>
+                      </ul>
+                    </li>
+                    <li>
+                      Carte perdue ou volée
+                      <ul>
+                        <li><a target="_blank" href="#">Signaler une carte perdue ou volée</a></li>
+                        <li><a target="_blank" href="#">Suspendre une carte perdue ou volée</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+                <div class="viewAll">
+                  <a onclick="menuNavigation('loans')" class="angleDown">Consulter la section complète</a>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="category">
+                <div>
+                  <div class="title">Transactions et services en ligne</div>
+                  <ul>
+                    <li>
+                      Connexions
+                      <ul>
+                        <li><a target="_blank" href="#">AccèsD</a></li>
+                        <li><a target="_blank" href="#">Investisseur Qtrade</a></li>
+                        <li><a target="_blank" href="#">La Caisse scolaire</a></li>
+                        <li><a target="_blank" href="#">Credential</a></li>
+                        <li><a target="_blank" href="#">Service postal Acadie</a></li>
+                      </ul>
+                    </li>
+                    <li>
+                      Devenir autonome
+                      <ul>
+                        <li><a target="_blank" href="#">Outil d'accompagnement pour les services en ligne</a></li>
+                        <li><a target="_blank" href="#">Tutoriels vidéo pour les services en ligne</a></li>
+                        <li><a target="_blank" href="#">Guide des services en ligne AssisT</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+                <div class="viewAll">
+                  <a onclick="menuNavigation('onlineServices')" class="angleDown">Consulter la section complète</a>
+                </div>
+              </div>
+              <div class="category">
+                <div>
+                  <div class="title">Ma maison</div>
+                  <ul>
+                    <li>
+                      Projets
+                      <ul>
+                        <li><a target="_blank" href="#">Acheter ou construire une maison</a></li>
+                        <li><a target="_blank" href="#">Rénover sa maison</a></li>
+                        <li><a target="_blank" href="#">Renouveler son hypothèque</a></li>
+                        <li><a target="_blank" href="#">Transférer son hypothèque chez UNI</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+                <div class="viewAll">
+                  <a onclick="menuNavigation('house')" class="angleDown">Consulter la section complète</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="right">
+            <ul>
+              <li class="subCategory">
+                <div class="title">Autres services</div>
+                <ul>
+                  <li><a target="_blank" href="#">Changer son forfait transactionnel</a></li>
+                  <li><a target="_blank" href="#">Commander des chèques</a></li>
+                  <li><a target="_blank" href="#">S'inscrire au dépôt direct de l'agence de revenu du Canada</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="right">
+        <div>
+          <div class="title">Appelez-nous</div>
+          <p>1 888 359-1357<br />Lundi au vendredi | 9&nbsp;h à 17&nbsp;h</p>
+          <div class="title">Écrivez-nous</div>
+          <p><button onclick="openContactPanel()" class="link angle">Remplir le formulaire</button></p>
+          <a onclick="openBulletinPanel()" class="bulletin">
+            <div class="title">Connaissez-vous <br />le Bulletin AssisT?</div>
+            <div class="angle">Restez informé sur les <br />sujets qui vous intéressent</div>
+          </a>
+          <div class="links">
+            <a class="lang" href="#">English</a>
+            <a class="angle" href="https://www.uni.ca">Visitez uni.ca</a>
+          </div>
+        </div>
+        <div class="copyright">
+          © 1996-2020 UNI est une marque déposée utilisée sous licence au Canada par Caisse populaire acadienne ltée.
+        </div>
+      </div>
+    </div>
+    <div id="contactPanel">
+      <!--Ajouter la class "hidden" une fois le formulaire envoyé-->
+      <div class="notSent">
+        <h2>Écrivez-nous</h2>
+        <div class="wrapForm">
+          <div class="formRow">
+            <div class="formItem">
+              <label>Prénom *</label>
+              <input type="text" value="" />
+            </div>
+            <div class="formItem">
+              <label>Nom *</label>
+              <input type="text" value="" />
+            </div>
+          </div>
+          <div class="formRow">
+            <div class="formItem">
+              <label>Courriel *</label>
+              <input type="email" value="" />
+            </div>
+          </div>
+          <div class="formRow">
+            <div class="formItem">
+              <label>Téléphone *</label>
+              <input type="text" value="" />
+            </div>
+          </div>
+          <div class="formRow">
+            <div class="formItem">
+              <label>Objet du message *</label>
+              <input type="text" value="" />
+            </div>
+          </div>
+          <div class="formRow">
+            <div class="formItem">
+              <label>Message *</label>
+              <textarea></textarea>
+            </div>
+          </div>
+          <div class="formActions">
+            <button class="btn alt white big" onclick="closeContactPanel()">Annuler</button>
+            <button class="btn white big" type="submit">Envoyer</button>
+          </div>
+        </div>
+        <!--Retirer la class "hidden" une fois le formulaire envoyé-->
+        <div class="sent hidden">
+          <h2>Lorem ipsum</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget pharetra odio, in ultrices urna. Nullam finibus risus vel risus consequat volutpat. Vestibulum ut massa.</p>
+          <button class="btn alt white big" onclick="closeContactPanel()">Fermer</button>
+        </div>
+      </div>
+    </div>
+    <div id="bulletinPanel">
+      <div class="suptitle">Bulletin AssisT</div>
+      <!--Ajouter la class "hidden" une fois le formulaire envoyé-->
+      <div class="notSent">
+        <h2>Être parmi les premiers informés</h2>
+        <div class="wrapForm">
+          <div class="formRow">
+            <div class="formItem">
+              <label>Mon nom est</label>
+              <input type="text" value="" placeholder="Prénom" />
+            </div>
+            <div class="formItem">
+              <label>&nbsp;</label>
+              <input type="text" value="" placeholder="Nom" />
+            </div>
+          </div>
+          <div class="formRow">
+            <div class="formItem">
+              <label>J'aimerais recevoir le bulletin au</label>
+              <input type="email" value="" />
+            </div>
+          </div>
+          <div class="formRow">
+            <div class="formItem">
+              <label>Pour les sujets suivants seulement :</label>
+              <div class="checkboxList">
+                <label class="fakeCheckbox">
+                  <input type="checkbox" name="name" value="" /><span></span>Tous les sujets
+                </label>
+                <label class="fakeCheckbox">
+                  <input type="checkbox" name="name" value="" /><span></span>Maison et investissements immobiliers
+                </label>
+                <label class="fakeCheckbox">
+                  <input type="checkbox" name="name" value="" /><span></span>Retraite et planification financière
+                </label>
+                <label class="fakeCheckbox">
+                  <input type="checkbox" name="name" value="" /><span></span>Voyage et déplacements d'affaires
+                </label>
+                <label class="fakeCheckbox">
+                  <input type="checkbox" name="name" value="" /><span></span>Transport et véhicules personnels et de compagnie
+                </label>
+                <label class="fakeCheckbox">
+                  <input type="checkbox" name="name" value="" /><span></span>Services généraux aux entreprises
+                </label>
+                <label class="fakeCheckbox">
+                  <input type="checkbox" name="name" value="" /><span></span>Offres variées pour les 16-30 ans
+                </label>
+                <label class="fakeCheckbox">
+                  <input type="checkbox" name="name" value="" /><span></span>Gestion des finances personnelles et d'affaires en ligne
+                </label>
+                <label class="fakeCheckbox">
+                  <input type="checkbox" name="name" value="" /><span></span>Programmes COVID-19 pour particuliers
+                </label>
+                <label class="fakeCheckbox">
+                  <input type="checkbox" name="name" value="" /><span></span>Programmes COVID-19 pour entreprises
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="notice">* Tous les champs sont obligatoires</div>
+          <div class="formActions">
+            <button onclick="closeBulletinPanel()" class="btn alt white big">Annuler</button>
+            <button class="btn white big" type="submit">Recevoir le bulletin</button>
+          </div>
+        </div>
+      </div>
+      <!--Retirer la class "hidden" une fois le formulaire envoyé-->
+      <div class="sent hidden">
+        <h2>Lorem ipsum</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget pharetra odio, in ultrices urna. Nullam finibus risus vel risus consequat volutpat. Vestibulum ut massa.</p>
+        <button class="btn alt white big" onclick="closeBulletinPanel()">Fermer</button>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="js/main.js" defer></script>
 </body>
 </html>

@@ -30,31 +30,90 @@ $mobileFontSize: 16;
   }
 }
 
-@media screen and (max-height: 950px), screen and (max-width: 1860px) {
-  #menu {
+@media screen and (max-height: 950px) and (min-width: 768px), screen and (max-width: 1860px) and (min-width: 768px) {
+  #bigMenu {
     font-size: rem(15);
   }
 
-  #menu .category:hover {
+  #bigMenu .category:hover {
     padding-bottom: 5em;
   }
 }
 
-@media screen and (max-height: 900px), screen and (max-width: 1760px) {
-  #menu {
+@media screen and (max-height: 900px) and (min-width: 768px), screen and (max-width: 1760px) and (min-width: 768px) {
+  #bigMenu {
     font-size: rem(14);
   }
 }
 
+@media screen and (max-height: 875px), screen and (max-width: 1660px) {
+  .home {
+    padding-left: rem(90);
+    padding-right: rem(90);
+  }
+
+  .home .wrapSlider.loaded #tns1-ow .tns-controls {
+    width: calc(100% + 11.25rem); //Padding de la home page
+    left: -5.625rem;
+  }
+
+  .home .homeContent .logo {
+    width: 34%;
+  }
+
+  .home .homeContent {
+    font-size: 2rem;
+
+    h1 {
+      font-size: 3rem;
+    }
+  }
+
+  .home .homeSlider .tns-item > a {
+    padding: 1.75rem 7.625rem 4.75rem 1.75rem;
+
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
+}
+
 @media screen and (max-height: 850px), screen and (max-width: 1560px) {
-  #menu {
+  #bigMenu {
     font-size: rem(13);
   }
 }
 
 @media screen and (max-height: 768px), screen and (max-width: 1350px) {
-  #menu {
+  #bigMenu {
     font-size: rem(12);
+  }
+
+  .home {
+    padding-top: 8vh;
+    padding-bottom: 8vh;
+  }
+
+  .home .homeContent h1 {
+    font-size: 2.5rem;
+  }
+
+  .home .homeContent {
+    font-size: 1.65rem;
+  }
+
+  .home .wrapSlider #tns1-ow {
+    margin-top: 4rem;
+  }
+
+  .home .homeSlider .tns-item > a {
+    padding: 1.5rem 7.25rem 4rem 1.5rem;
+  }
+}
+
+@media screen and (max-height: 720px), screen and (max-width: 1280px) {
+  html {
+    font-size: 15px;
   }
 }
 
@@ -107,11 +166,21 @@ $mobileFontSize: 16;
     font-size: rem(16);
   }
 
-  .text{
+  .text {
     font-size: rem(14);
   }
 
-  a.video:before{
+  .btn {
+    padding: rem(11) rem(12);
+    font-size: rem(14);
+  }
+
+  .tag {
+    font-size: rem(10);
+    padding: 0.25rem 0.5rem;
+  }
+
+  a.video:before {
     width: rem(40);
     height: rem(40);
     font-size: rem(16);
@@ -119,7 +188,7 @@ $mobileFontSize: 16;
 
   header {
     padding: 0;
-    height: auto;
+    height: rem(72);
 
     .left {
       .logo {
@@ -158,18 +227,23 @@ $mobileFontSize: 16;
   #app {
     background: linear-gradient(180deg, #00ADC4 25%, #00224B 71.87%);
     background-attachment: fixed;
+    min-width: 320px;
+    min-height: 0;
   }
 
-  #menu {
-    position: static;
+  #bigMenu {
+    position: absolute;
     display: block;
-    height: auto;
+    height: 100%;
     font-size: 1rem;
+    overflow: scroll;
+    transition-duration: 0.5s;
 
     > .left {
       width: 100%;
       display: block;
       padding: rem(24);
+      height: auto;
 
       > .top {
         padding-bottom: rem(24);
@@ -181,10 +255,13 @@ $mobileFontSize: 16;
         > .left {
           width: 100%;
           display: block;
-          gap: 0;
 
           > div {
-            gap: 0;
+            margin-right: 0;
+
+            > div:last-child {
+              margin-bottom: 1.5em;
+            }
           }
         }
 
@@ -196,6 +273,27 @@ $mobileFontSize: 16;
           > ul {
             > li {
               position: relative;
+              margin-bottom: 0.25rem;
+
+              > ul {
+                font-size: 0;
+                line-height: 0%;
+                margin: 0;
+                transition: all $t2;
+                transition-timing-function: ease-out;
+              }
+
+              &.open {
+                > ul {
+                  font-size: inherit;
+                  line-height: normal;
+                  margin-bottom: 2rem;
+                }
+
+                &:after {
+                  content: "\f068";
+                }
+              }
 
               &:last-child {
                 margin-bottom: 0;
@@ -262,28 +360,32 @@ $mobileFontSize: 16;
         position: absolute;
       }
 
-      &:hover {
-        padding-bottom: rem(20);
-
-        &:after {
-          content: "\f068";
-        }
-      }
-
       ul {
         margin-bottom: 0;
+        transition-delay: 0s;
 
         > li {
-          font-size: rem(16);
-          margin-bottom: rem(16);
+          transition: all $t2;
+          transition-timing-function: ease-in;
+          transition-delay: 0s;
+          font-size: 0;
+          margin: 0;
 
           > ul {
             opacity: 1;
+            padding-left: 1em;
+            margin-top: 0;
+            transition: margin $t2;
+            transition-timing-function: ease-out;
+            transition-delay: 0s;
 
             > li {
-              font-size: rem(14);
-              line-height: 150%;
-              margin-top: rem(12);
+              transition: all $t2;
+              transition-timing-function: ease-in;
+              transition-delay: 0s;
+              font-size: 0;
+              line-height: 0%;
+              margin: 0;
             }
           }
         }
@@ -291,14 +393,58 @@ $mobileFontSize: 16;
 
       .viewAll {
         position: static;
-        margin-top: rem(20);
+        margin-top: 0;
+        transition: all $t2;
+        transition-timing-function: ease-out;
 
         a {
           font-size: rem(14);
+          text-decoration: none;
 
           &:after {
             display: none;
           }
+        }
+      }
+
+      &.open {
+        padding-bottom: rem(20);
+
+        &:after {
+          content: "\f068";
+        }
+
+        ul {
+          transition: none;
+
+          > li {
+            font-size: rem(16);
+            margin-bottom: rem(16);
+            transition: all $t2;
+            transition-timing-function: ease-out;
+            transition-delay: 0s;
+
+            > ul {
+              transition: margin $t2;
+              transition-timing-function: ease-out;
+              transition-delay: 0s;
+              margin-top: 0.5rem;
+
+              > li {
+                font-size: rem(14);
+                line-height: 150%;
+                margin-top: rem(12);
+                transition: all $t2;
+                transition-timing-function: ease-out;
+                transition-delay: 0s;
+                margin-bottom: 0.28571em;
+              }
+            }
+          }
+        }
+
+        .viewAll {
+          margin-top: rem(20);
         }
       }
     }
@@ -389,10 +535,10 @@ $mobileFontSize: 16;
       padding: rem(20);
     }
 
-    .extra{
+    .extra {
       padding: rem(24) rem(42) rem(24) rem(24);
 
-      .close{
+      .close {
         top: rem(12);
         right: rem(12);
       }
@@ -416,48 +562,264 @@ $mobileFontSize: 16;
       .blockContent > a {
         padding: 1.25rem;
 
-        .name{
+        .name {
           font-size: rem(16);
         }
 
-        .angle{
+        .angle {
           font-size: rem(14);
         }
       }
     }
 
-    &.tutorials{
-      .link{
+    &.tutorials {
+      .link {
         margin-top: rem(20);
       }
     }
 
-    &.financing ul li{
+    &.financing ul li {
       font-size: rem(16);
     }
 
-    &.guide{
+    &.guide {
       min-height: rem(160);
       padding: rem(20);
 
-      .title{
+      .title {
         font-size: rem(20);
       }
 
-      .link{
+      .link {
         font-size: rem(14);
       }
 
-      .img{
+      .img {
         right: rem(20);
       }
     }
 
-    &.quote{
+    &.quote {
       padding: rem(20) rem(32);
 
-      .source{
+      .source {
         font-size: rem(14);
+      }
+    }
+  }
+
+  .sections {
+    border: rem(4) solid #FFF;
+    position: absolute;
+    left: rem(16);
+    bottom: rem(16);
+
+    a {
+      padding: rem(12) rem(16);
+    }
+  }
+
+  .home {
+    padding: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 0;
+
+    .homeMenu {
+      display: none;
+    }
+
+    .homeContent {
+      width: percent(311,411);
+      font-size: rem(22);
+      line-height: 105%;
+      padding-top: rem(68);
+      padding-left: rem(28);
+
+      .logo {
+        display: none;
+      }
+
+      h1 {
+        font-size: rem(28);
+      }
+    }
+
+    #tns2-ow {
+      width: percent(188,411);
+      right: rem(-24);
+      top: rem(72);
+    }
+
+    .wrapSlider {
+      padding-left: rem(28);
+
+      #tns1-ow {
+        width: percent(307,383);
+        margin-top: 1rem;
+
+        .tns-controls {
+          display: none;
+        }
+      }
+    }
+
+    .homeSlider .tns-item {
+      &:first-child {
+        > a:after {
+          width: rem(95);
+          height: rem(106.42);
+          bottom: 19.39%;
+          right: -4%;
+        }
+
+        > a:before {
+          width: rem(37.62);
+          height: rem(42.12);
+          transform: rotate(-119.86deg);
+          top: 47%;
+          left: 48%;
+        }
+
+        > a:hover:after {
+          width: rem(105);
+          height: rem(116.42);
+          bottom: 17.39%;
+          right: -4%;
+        }
+
+        > a:hover:before {
+          width: rem(37.62);
+          height: rem(42.12);
+          transform: rotate(-99.86deg);
+          top: 50%;
+          left: 46%;
+        }
+      }
+
+      > a {
+        padding: rem(24);
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+
+        &:after {
+          width: rem(104.64);
+          height: rem(114.38);
+        }
+
+        > div:first-child {
+          padding-right: rem(50);
+        }
+
+        .subtitle {
+          font-size: rem(12);
+          margin-bottom: rem(8);
+        }
+
+        h2 {
+          font-size: rem(18);
+        }
+
+        .tag {
+          margin-top: 0;
+        }
+
+        .viewMore {
+          position: static;
+          transform: none;
+          width: 100%;
+          margin-top: 1rem;
+
+          .angleDown {
+            font-size: rem(14);
+          }
+        }
+
+        .icon {
+          transform: scale(0.6);
+          bottom: 0;
+        }
+
+        &:hover {
+          height: 100%;
+          transform: none;
+
+          .icon {
+            transform: scale(0.675);
+          }
+        }
+      }
+    }
+
+    .progress {
+      margin-top: 0;
+      width: calc(100% - 1.75rem);
+    }
+
+    .visual {
+      z-index: -1;
+
+      &.visual-pea {
+        position: absolute;
+        width: rem(80.96);
+        height: rem(72.35);
+        right: 2rem;
+        top: 14.5rem;
+        opacity: 0;
+        transform: rotate(127.7deg) scale(0.1,-0.1);
+      }
+
+      &.visual-tooth {
+        position: absolute;
+        width: percent(306.33, 1920);
+        height: percent(342.75, 1003);
+        right: percent(894.41, 1920);
+        top: percent(788.65, 1003);
+        opacity: 0;
+        transform: rotate(134.96deg);
+      }
+
+      &.visual-peanut {
+        position: absolute;
+        width: rem(120);
+        height: rem(134.27);
+        right: 10.6375rem;
+        top: -4.8rem;
+        opacity: 0;
+        transform: rotate(30.8deg);
+      }
+
+      &.loaded {
+        &.visual-pea {
+          position: absolute;
+          width: rem(80.96);
+          height: rem(72.35);
+          right: 2rem;
+          top: 14.5rem;
+          transform: rotate(127.7deg) scale(1,-1);
+          opacity: 1;
+        }
+
+        &.visual-tooth {
+          position: absolute;
+          width: rem(194.81);
+          height: rem(217.98);
+          right: -1rem;
+          top: 17rem;
+          transform: rotate(74.61deg);
+          opacity: 0.4;
+        }
+
+        &.visual-peanut {
+          position: absolute;
+          width: rem(120);
+          height: rem(134.27);
+          right: 8.6375rem;
+          top: 0.8rem;
+          opacity: 0.8;
+          transform: rotate(74.61deg);
+        }
       }
     }
   }
